@@ -28,29 +28,33 @@
 # 따라서 5일째에 1개의 기능, 10일째에 3개의 기능, 20일째에 2개의 기능이 배포됩니다.
 
 # ※ 공지 - 2020년 7월 14일 테스트케이스가 추가되었습니다.
+from collections import deque
 import math
-
 def solution(progresses, speeds):
-    nowIndex = 0
-    nowDays = 0
-    nowDeploy = 0
-    result = []
-    while len(progresses) > 0:
-        if (100-progresses[0]) - nowDays*speeds[0] < 0:
-            result[nowIndex] += 1
-            progresses.pop(0)
-            speeds.pop(0)
-        else:
-            if len(result) == 0:
-                result.append(0)
-            elif result[nowIndex] != 0:
-                result.append(0)
-                nowIndex += 1
-            nowDays += 1
-    return result
+    answer = []
+    work_flow=deque() 
+    for progres,speed in zip(progresses,speeds) : 
+        work_per = 100 - progres 
+        work_day = math.ceil(work_per/speed)
+        work_flow.append(work_day) 
+    cnt=1
+    while(work_flow):
+        if cnt > 1 : 
+            cnt-=1 
+            now_progres=work_flow.popleft()
+            continue
+
+        now_progres=work_flow.popleft() 
+        for progres in work_flow : 
+            if now_progres >= progres : 
+                cnt+=1 
+            else : 
+                break
+        answer.append(cnt)
+    return answer
         
 
 if __name__ == "__main__":
-    progresses = [95, 90, 99, 99, 80, 99]
-    speeds = [1, 1, 1, 1, 1, 1]
+    progresses =  [99, 99, 99, 90, 90, 90]
+    speeds = [1,1,1,1,1,1]
     print(solution(progresses, speeds))
