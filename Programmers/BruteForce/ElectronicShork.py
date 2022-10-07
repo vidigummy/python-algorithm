@@ -84,5 +84,5 @@ def solution(n, wires):
 
 if __name__ == '__main__':
     n = 9
-    wires = 	[[1,2],[2,7],[3,7],[3,4],[4,5],[6,7]]
+    wires = [[1,3],[2,3],[3,4],[4,5],[4,6],[4,7],[7,8],[7,9]]
     print(solution(n,wires))
