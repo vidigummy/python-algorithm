@@ -91,5 +91,29 @@
 # result.clear()
 # print(result)
 
-import math
-print(math.pow(10,0))
+# import math
+# print(math.pow(10,0))
+
+# a = [[3,1,4],[2,5,6],[2,7,9]]
+# for i in a:
+#     print(i)
+# b = [a[i][:2] for i in range(2)]
+# # for row in b:
+# #     print(row)
+# new_b = list(map(list, zip(*b[::-1])))
+# # print("dd")
+# # for row in new_b:
+# #     print(row)
+
+# a[0:2][0:2] = new_b
+# for i in a:
+#     print(i)
+
+a = dict()
+a[1] = 32
+a[4] = 2
+a[3] = 3
+print(sorted(a.keys(), reverse=True))
+for i in sorted(a.keys(), reverse=True):
+    del(a[i])
+print(a)
