@@ -43,18 +43,14 @@ def find_passenger(graph_map, passenger_map, now_geo, N):
     can_go_list = find_next_direction_list(graph_map,N,now_geo[0],now_geo[1], isVisited)
     while True:
         new_can_go_list = deque()
-        result_list = list()
-        while can_go_list:
+        depth += 1
+        while dict([can_go_list].sort(key = lambda x: (x[0],x[1]))):
             go = can_go_list.popleft()
             isVisited[go] = True
             if go in passenger_map:
-                result_list.append(go)
+                return (depth,go)
             can_go = find_next_direction_list(graph_map,N,go[0],go[1], isVisited)
             new_can_go_list = new_can_go_list + can_go
-        depth += 1
-        if len(result_list) > 0:
-            result_sorted = sorted(result_list, key = lambda x : (x[0],x[1]))
-            return (depth,result_sorted[0])
         can_go_list = new_can_go_list
         if(len(can_go_list) < 1):
             return False
